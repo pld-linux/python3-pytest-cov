@@ -1,9 +1,10 @@
 #
 # Conditional build:
-%bcond_without	doc	# Sphinx documentation
-%bcond_with	tests	# py.test tests [require some modules sources, sensitive to coverage and pytest output]
-%bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
+%bcond_without	doc		# Sphinx documentation
+%bcond_with	tests		# py.test tests [sensitive to coverage and pytest output, hang for me]
+%bcond_with	tests_py2	# Python 2 py.test tests [require some modules sources + the above]
+%bcond_without	python2		 # CPython 2.x module
+%bcond_without	python3		 # CPython 3.x module
 
 Summary:	pytest plugin for measuring coverage
 Summary(pl.UTF-8):	Wtyczka pytest do mierzenia pokrycia
@@ -19,12 +20,12 @@ URL:		https://github.com/pytest-dev/pytest-cov
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
-%if %{with tests}
+%if %{with tests_py2}
 BuildRequires:	python-coverage >= 3.7.1
 BuildRequires:	python-helper
 BuildRequires:	python-process_tests >= 1.2.0
 BuildRequires:	python-pytest >= 2.6.0
-BuildRequires:	python-pytest-capturelog
+BuildRequires:	python-pytest-catchlog
 BuildRequires:	python-pytest-xdist >= 1.15.0
 BuildRequires:	python-virtualenv
 %endif
@@ -37,7 +38,7 @@ BuildRequires:	python3-coverage >= 3.7.1
 BuildRequires:	python3-helper
 BuildRequires:	python3-process_tests >= 1.2.0
 BuildRequires:	python3-pytest >= 2.6.0
-BuildRequires:	python3-pytest-capturelog
+BuildRequires:	python3-pytest-catchlog
 BuildRequires:	python3-pytest-xdist >= 1.15.0
 BuildRequires:	python3-virtualenv
 %endif
@@ -96,7 +97,7 @@ Dokumentacja do modułu pytest-cov.
 %if %{with python2}
 %py_build
 
-%if %{with tests}
+%if %{with tests_py2}
 PYTHONPATH=$(pwd)/build-2/lib PYTEST_PLUGINS=pytest_cov.plugin %{__python} -m pytest
 %endif
 %endif
