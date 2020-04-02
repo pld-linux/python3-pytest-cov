@@ -9,23 +9,23 @@
 Summary:	pytest plugin for measuring coverage
 Summary(pl.UTF-8):	Wtyczka pytest do mierzenia pokrycia
 Name:		python-pytest-cov
-Version:	2.6.0
-Release:	2
+Version:	2.8.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-cov/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytest-cov/pytest-cov-%{version}.tar.gz
-# Source0-md5:	7c8c1bf2a5c355a4c3ad9aafe4a1894d
+# Source0-md5:	8af2a54e5b17a3981ba52389c2b88020
 URL:		https://github.com/pytest-dev/pytest-cov
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %if %{with tests_py2}
-BuildRequires:	python-coverage >= 4.4
+BuildRequires:	python-coverage >= 4.5.4
 BuildRequires:	python-fields
-BuildRequires:	python-process_tests >= 2.0.0
+BuildRequires:	python-process_tests >= 2.0.2
 BuildRequires:	python-py
-BuildRequires:	python-pytest >= 2.9
+BuildRequires:	python-pytest >= 3.10.1
 BuildRequires:	python-pytest-xdist >= 1.23.0
 BuildRequires:	python-six
 BuildRequires:	python-virtualenv
@@ -35,11 +35,11 @@ BuildRequires:	python-virtualenv
 BuildRequires:	python3-modules >= 1:3.4
 BuildRequires:	python3-setuptools
 %if %{with tests}
-BuildRequires:	python3-coverage >= 4.4
+BuildRequires:	python3-coverage >= 4.5.4
 BuildRequires:	python3-fields
-BuildRequires:	python3-process_tests >= 2.0.0
+BuildRequires:	python3-process_tests >= 2.0.2
 BuildRequires:	python3-py
-BuildRequires:	python3-pytest >= 2.9
+BuildRequires:	python3-pytest >= 3.10.1
 BuildRequires:	python3-pytest-xdist >= 1.23.0
 BuildRequires:	python3-six
 BuildRequires:	python3-virtualenv
