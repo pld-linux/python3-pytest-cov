@@ -9,13 +9,14 @@
 Summary:	pytest plugin for measuring coverage
 Summary(pl.UTF-8):	Wtyczka pytest do mierzenia pokrycia
 Name:		python-pytest-cov
-Version:	2.8.1
-Release:	2
+# keep 2.x here for python2 support; >=2.11,<3 requires updating coverage to >=5.2.1
+Version:	2.10.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-cov/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytest-cov/pytest-cov-%{version}.tar.gz
-# Source0-md5:	8af2a54e5b17a3981ba52389c2b88020
+# Source0-md5:	13e17f0b4f263a04fb1fadde7ebe2fbb
 URL:		https://github.com/pytest-dev/pytest-cov
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
