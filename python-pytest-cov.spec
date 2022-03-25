@@ -11,7 +11,7 @@ Summary(pl.UTF-8):	Wtyczka pytest do mierzenia pokrycia
 Name:		python-pytest-cov
 # keep 2.x here for python2 support; >=2.11,<3 requires updating coverage to >=5.2.1
 Version:	2.10.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-cov/
