@@ -9,48 +9,49 @@
 Summary:	pytest plugin for measuring coverage
 Summary(pl.UTF-8):	Wtyczka pytest do mierzenia pokrycia
 Name:		python-pytest-cov
-# keep 2.x here for python2 support; >=2.11,<3 requires updating coverage to >=5.2.1
-Version:	2.10.1
-Release:	3
+# keep 2.x here for python2 support
+Version:	2.12.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-cov/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytest-cov/pytest-cov-%{version}.tar.gz
-# Source0-md5:	13e17f0b4f263a04fb1fadde7ebe2fbb
+# Source0-md5:	4fb4f91505545f48a2164b4dfdb1ecdc
 URL:		https://github.com/pytest-dev/pytest-cov
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %if %{with tests_py2}
-BuildRequires:	python-coverage >= 4.5.4
+BuildRequires:	python-coverage >= 5.2.1
 BuildRequires:	python-fields
 BuildRequires:	python-process_tests >= 2.0.2
-BuildRequires:	python-py
-BuildRequires:	python-pytest >= 3.10.1
-BuildRequires:	python-pytest-xdist >= 1.23.0
+BuildRequires:	python-pytest >= 4.6
+BuildRequires:	python-pytest-xdist >= 1.27.0
 BuildRequires:	python-six
+BuildRequires:	python-toml
 BuildRequires:	python-virtualenv
 %endif
 %endif
 %if %{with python3}
-BuildRequires:	python3-modules >= 1:3.4
+BuildRequires:	python3-modules >= 1:3.5
 BuildRequires:	python3-setuptools
 %if %{with tests}
-BuildRequires:	python3-coverage >= 4.5.4
+BuildRequires:	python3-coverage >= 5.2.1
 BuildRequires:	python3-fields
 BuildRequires:	python3-process_tests >= 2.0.2
-BuildRequires:	python3-py
-BuildRequires:	python3-pytest >= 3.10.1
-BuildRequires:	python3-pytest-xdist >= 1.23.0
+BuildRequires:	python3-pytest >= 4.6
+BuildRequires:	python3-pytest-xdist >= 1.27.0
 BuildRequires:	python3-six
+BuildRequires:	python3-toml
 BuildRequires:	python3-virtualenv
 %endif
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with doc}
-BuildRequires:	sphinx-pdg
-BuildRequires:	python3-sphinx_py3doc_enhanced_theme
+BuildRequires:	python3-docutils >= 0.16
+BuildRequires:	python3-sphinx_py3doc_enhanced_theme >= 2.4.0
+BuildRequires:	sphinx-pdg-3 >= 3.0.3
 %endif
 Requires:	python-modules >= 1:2.7
 BuildArch:	noarch
@@ -70,7 +71,7 @@ Obsługuje także pokrycie podprocesów.
 Summary:	pytest plugin for measuring coverage
 Summary(pl.UTF-8):	Wtyczka pytest do mierzenia pokrycia
 Group:		Libraries/Python
-Requires:	python3-modules >= 1:3.4
+Requires:	python3-modules >= 1:3.5
 
 %description -n python3-pytest-cov
 This plugin produces coverage reports. It supports centralised testing
@@ -102,7 +103,8 @@ Dokumentacja do modułu pytest-cov.
 
 %if %{with tests_py2}
 PYTHONPATH=$(pwd)/src:$(pwd)/tests \
-XPYTEST_PLUGINS=pytest_cov.plugin \
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+PYTEST_PLUGINS=pytest_cov.plugin,xdist.looponfail,xdist.plugin \
 %{__python} -m pytest tests
 %endif
 %endif
@@ -112,14 +114,14 @@ XPYTEST_PLUGINS=pytest_cov.plugin \
 
 %if %{with tests}
 PYTHONPATH=$(pwd)/src:$(pwd)/tests \
-XPYTEST_PLUGINS=pytest_cov.plugin \
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+PYTEST_PLUGINS=pytest_cov.plugin,xdist.looponfail,xdist.plugin \
 %{__python3} -m pytest tests
 %endif
 %endif
 
 %if %{with doc}
-cd docs
-sphinx-build -b html . _build/html
+sphinx-build-3 -b html docs docs/_build/html
 %endif
 
 %install
